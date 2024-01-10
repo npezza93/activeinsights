@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require_relative "../test/dummy/config/application"
+require "importmap/commands"
