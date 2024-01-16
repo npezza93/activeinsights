@@ -19,7 +19,7 @@
 
     body, p, ol, ul, td, input {
       font-family: helvetica, verdana, arial, sans-serif;
-      font-size:   13px;
+      font-size:   15px;
       line-height: 18px;
     }
 
@@ -261,39 +261,81 @@
       }
 
       a { color: #C00; }
-      a.trace-frames { color: #999; }
-      a:hover, a.trace-frames.selected { color: #E9382B; }
     }
 
-    :root {
-      --duet-color-primary: #C00;;
-      --duet-color-text: #fff;
-      --duet-color-text-active: #fff;
-      --duet-color-placeholder: #aaa;
-      --duet-color-button: #444;
-      --duet-color-surface: #222;
-      --duet-color-overlay: rgba(0, 0, 0, 0.8);
-      --duet-color-border: #fff;
-
-      --duet-font: helvetica, verdana, arial, sans-serif;
-      --duet-font-normal: 400;
-      --duet-font-bold: 600;
-
-      --duet-radius: 4px;
-      --duet-z-index: 600;
+    table {
+      margin: 0;
+      border-collapse: collapse;
+      word-wrap:break-word;
+      table-layout: auto;
+      width: 100%;
+      margin-top: 50px;
     }
 
-    .duet-date__toggle {
-      display: none;
+    table thead tr {
+      border-bottom: 2px solid #ddd;
     }
-    .duet-date__input {
-      padding-right: 14px;
+
+    table th {
+      padding-left: 30px;
+      text-align: left;
     }
-    .duet-date__dialog-content {
-      border-color: #fff;
+
+    table tbody tr {
+      border-bottom: 1px solid #ddd;
     }
-    [data-controller="date-picker"] {
-      width: 150px;
+
+    table tbody tr:nth-child(odd) {
+      background: #f2f2f2;
+    }
+
+    table td {
+      padding: 4px 30px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      table tbody tr:nth-child(odd) {
+        background: #282828;
+      }
+    }
+
+    .pl-30px {
+      padding-left: 30px;
+    }
+
+    .pt-30px {
+      padding-top: 30px;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+    .flex-row {
+      flex-direction: row;
+    }
+    .justify-around {
+      justify-content: space-around;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+    .items-center {
+      align-items: center;
+    }
+    .font-size-30 {
+      font-size: 30px;
+      line-height: 30px;
+    }
+    .no-underline {
+      text-decoration: none;
+    }
+    .p-16px {
+      padding: 16px;
     }
 
     <%= yield :style %>

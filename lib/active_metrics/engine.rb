@@ -27,7 +27,8 @@ module ActiveMetrics
     end
 
     initializer "active_metrics.importmap", before: "importmap" do |app|
-      app.config.importmap.paths << Engine.root.join("config/initializers/importmap.rb")
+      app.config.importmap.paths <<
+        Engine.root.join("config/initializers/importmap.rb")
     end
 
     initializer "active_metrics.subscriber" do |_app|

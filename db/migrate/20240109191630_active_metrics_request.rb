@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ActiveMetricsRequest < ActiveRecord::Migration[7.1]
-  def change
+  def change # rubocop:disable Metrics/AbcSize
     create_table :active_metrics_requests, if_not_exists: true do |t|
       t.string :controller
       t.string :action
@@ -15,6 +15,11 @@ class ActiveMetricsRequest < ActiveRecord::Migration[7.1]
       t.datetime :finished_at
       t.string :uuid
       t.float :duration
+      t.virtual :formatted_controller, type: :string, as: "controller || '#'|| action", stored: true
+
+      t.index :started_at
+      t.index %i(started_at duration)
+      t.index %i(started_at formatted_controller)
 
       t.timestamps
     end

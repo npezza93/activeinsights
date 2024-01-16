@@ -1,2 +1,5 @@
-import "date_time_picker"
-import "controllers"
+import "chartkick"
+import "Chart.bundle"
+import zoomPlugin from 'chartjs-plugin-zoom'
+
+Chart.register(zoomPlugin)

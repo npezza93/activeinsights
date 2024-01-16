@@ -3,5 +3,23 @@
 module ActiveMetrics
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
+
+    around_action :setup_time_zone
+    before_action :set_date
+
+    private
+
+    def set_date
+      @date =
+        if params[:date].present?
+          Date.parse(params[:date])
+        else
+          Date.current
+        end.all_day
+    end
+
+    def setup_time_zone(&block)
+      Time.use_zone("Eastern Time (US & Canada)", &block)
+    end
   end
 end

@@ -7,8 +7,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 group :development, :test do
+  gem "activerecord-enhancedsqlite3-adapter"
   gem "simplecov"
-  gem "sqlite3"
 
   gem "rubocop"
   gem "rubocop-performance"
@@ -19,4 +19,6 @@ group :development, :test do
 
   gem "importmap-rails"
   gem "stimulus-rails"
+
+  gem "rubystats"
 end

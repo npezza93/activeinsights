@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib,vendor}/**/*", "LICENSE.md",
                    "Rakefile", "README.md"]
 
+  spec.add_dependency "chartkick"
   spec.add_dependency "importmap-rails"
   spec.add_dependency "rails", ">= 7.1"
-  spec.add_dependency "stimulus-rails"
 end

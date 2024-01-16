@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_09_191630) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_11_225806) do
   create_table "active_metrics_requests", force: :cascade do |t|
     t.string "controller"
     t.string "action"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_09_191630) do
     t.float "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["started_at"], name: "index_active_metrics_requests_on_started_at"
   end
 
 end
