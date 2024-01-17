@@ -1,11 +1,16 @@
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") {} %>
+  username: <%= ENV.fetch("POSTGRES_USER") {} %>
+  port: <%= ENV.fetch("POSTGRES_PORT") { 5432 } %>
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
 
 development:
   <<: *default
-  database: development
+  database: dev
 
 test:
   <<: *default

@@ -24,6 +24,9 @@ jobs:
 
   build-pg:
     runs-on: ubuntu-latest
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     services:
       postgres:
         image: postgres:latest
