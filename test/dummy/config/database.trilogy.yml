@@ -1,10 +1,13 @@
 default: &default
   adapter: trilogy
   encoding: utf8mb4
-  pool: <%%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: '127.0.0.1'
   username: root
   password:
-  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  reconnect: true
+  variables:
+    sql_mode: TRADITIONAL
 
 development:
   <<: *default
