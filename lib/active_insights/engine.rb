@@ -20,6 +20,8 @@ module ActiveInsights
       ActiveSupport::Notifications.
         subscribe("process_action.action_controller") do |_name,
           started, finished, unique_id, payload|
+        next if Rails.env.development?
+
         Thread.new do
           ActiveRecord::Base.connection_pool.with_connection do
             ActiveInsights::Request.create!(
