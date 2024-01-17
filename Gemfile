@@ -8,7 +8,9 @@ gemspec
 
 group :development, :test do
   gem "activerecord-enhancedsqlite3-adapter"
+  gem "pg"
   gem "simplecov"
+  gem "trilogy"
 
   gem "rubocop"
   gem "rubocop-performance"

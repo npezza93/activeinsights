@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-sqlite:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -19,5 +19,55 @@ jobs:
       run: |
         sudo apt-get install libsqlite3-dev -y
         bundle install
+    - name: Run tests
+      run: bin/test
+
+  build-pg:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Install dependencies
+      run: |
+        sudo apt-get -yqq install libpq-dev
+        bundle install
+        mv test/dummy/config/database.pg.yml test/dummy/config/database.yml
+    - name: Run tests
+      run: bin/test
+
+  build-mysql:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Install dependencies
+      run: |
+        sudo service mysql start
+        sudo mysqladmin -proot password ''
+        bin/rails db:create db:test:prepare
+        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
+        bundle install
+        mv test/dummy/config/database.trilogy.yml test/dummy/config/database.yml
     - name: Run tests
       run: bin/test
