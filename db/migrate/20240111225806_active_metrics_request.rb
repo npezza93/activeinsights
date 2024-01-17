@@ -15,7 +15,12 @@ class ActiveMetricsRequest < ActiveRecord::Migration[7.1]
       t.datetime :finished_at
       t.string :uuid
       t.float :duration
-      t.virtual :formatted_controller, type: :string, as: "controller || '#'|| action", stored: true
+      case connection.adapter_name
+      when "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
+        t.virtual :formatted_controller, type: :string, as: "CONCAT(controller, '#', action)", stored: true
+      else
+        t.virtual :formatted_controller, type: :string, as: "controller || '#'|| action", stored: true
+      end
 
       t.index :started_at
       t.index %i(started_at duration)
