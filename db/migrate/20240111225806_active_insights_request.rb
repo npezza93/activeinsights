@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ActiveInsightsRequest < ActiveRecord::Migration[7.1]
-  def change # rubocop:disable Metrics/AbcSize
+  def change
     create_table :active_insights_requests, if_not_exists: true do |t|
       t.string :controller
       t.string :action

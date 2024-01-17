@@ -638,6 +638,8 @@ Metrics/AbcSize:
   Reference: http://c2.com/cgi/wiki?AbcMetric
   Enabled: true
   Max: 15
+  Exclude:
+    - db/migrate/*.rb
 
 Metrics/BlockLength:
   Description: Avoid long blocks with many lines.
