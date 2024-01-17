@@ -7,7 +7,7 @@ module ActiveMetrics
       when "SQLite", "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
         select("GROUP_CONCAT(duration) AS durations")
       when "PostgreSQL"
-        select("STRING_AGG(duration, ',') AS durations")
+        select("STRING_AGG(CAST(duration AS varchar), ',') AS durations")
       end
     }
     scope :group_by_minute, lambda {
