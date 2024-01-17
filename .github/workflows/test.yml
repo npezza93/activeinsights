@@ -69,9 +69,8 @@ jobs:
       run: |
         sudo service mysql start
         sudo mysqladmin -proot password ''
+        mv test/dummy/config/database.trilogy.yml test/dummy/config/database.yml
         bin/rails db:create db:test:prepare
         mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
-        bundle install
-        mv test/dummy/config/database.trilogy.yml test/dummy/config/database.yml
     - name: Run tests
       run: bin/test
