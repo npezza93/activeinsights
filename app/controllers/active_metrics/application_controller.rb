@@ -18,8 +18,8 @@ module ActiveMetrics
         end.all_day
     end
 
-    def setup_time_zone(&block)
-      Time.use_zone("Eastern Time (US & Canada)", &block)
+    def setup_time_zone(&block) # rubocop:disable Style/ArgumentsForwarding
+      Time.use_zone("Eastern Time (US & Canada)", &block) # rubocop:disable Style/ArgumentsForwarding
     end
   end
 end

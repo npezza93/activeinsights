@@ -4,26 +4,11 @@ module ActiveMetrics
   class Engine < ::Rails::Engine
     isolate_namespace ActiveMetrics
 
-    class << self
-      attr_accessor :configuration
-    end
-
-    class Configuration
-      attr_reader :importmap
-
-      def initialize
-        @importmap = Importmap::Map.new
-        @importmap.draw(Engine.root.join("config/importmap.rb"))
-      end
-    end
-
-    def self.init_config
-      self.configuration ||= Configuration.new
-    end
-
-    def self.configure
-      init_config
-      yield(configuration)
+    def self.importmap
+      @importmap ||=
+        Importmap::Map.new.tap do |mapping|
+          mapping.draw(Engine.root.join("config/importmap.rb"))
+        end
     end
 
     initializer "active_metrics.importmap", before: "importmap" do |app|
@@ -52,5 +37,3 @@ module ActiveMetrics
     end
   end
 end
-
-ActiveMetrics::Engine.init_config

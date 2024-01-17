@@ -26,6 +26,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_225806) do
     t.float "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.virtual "formatted_controller", type: :string, as: "controller || '#'|| action", stored: true
+    t.index ["duration", "started_at"], name: "index_active_metrics_requests_on_duration_and_started_at"
+    t.index ["started_at", "formatted_controller"], name: "idx_on_started_at_formatted_controller_417448339a"
     t.index ["started_at"], name: "index_active_metrics_requests_on_started_at"
   end
 

@@ -2,7 +2,7 @@
 
 require "activemetrics"
 
-ActiveMetrics::Engine.configuration.importmap.draw do
+ActiveMetrics::Engine.importmap.draw do
   pin "application", to: "active_metrics/application.js"
 
   pin "chartkick", to: "chartkick.js"

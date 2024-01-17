@@ -41,9 +41,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @requests.each do |model| %>
+    <% @requests.sort_by(&:agony).reverse.each do |model| %>
       <tr>
-        <td><%= model.formatted_controller %></td>
+        <td><%= link_to model.formatted_controller, controller_p_values_path(@date.first.to_date, model.formatted_controller) %></td>
         <td><%= per_minute(model.parsed_durations.size, 24.hours) %></td>
         <td><%= model.p50 %> ms</td>
         <td><%= model.p95 %> ms</td>

@@ -3,7 +3,7 @@
 module ActiveMetrics
   module ApplicationHelper
     def active_metrics_importmap_tags(entry_point = "application")
-      importmap = ActiveMetrics::Engine.configuration.importmap
+      importmap = ActiveMetrics::Engine.importmap
 
       safe_join [
         javascript_inline_importmap_tag(importmap.to_json(resolver: self)),
@@ -41,11 +41,7 @@ module ActiveMetrics
     def percentile_value(data, percentile)
       value = data[(percentile * data.size).ceil - 1]
 
-      if value.respond_to?(:duration)
-        value.duration
-      else
-        value
-      end.round(1)
+      value&.round(1) || "N/A"
     end
   end
 end

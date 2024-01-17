@@ -25,6 +25,10 @@ module ActiveMetrics
       end
     }
 
+    def agony
+      parsed_durations.sum
+    end
+
     def parsed_durations
       return unless respond_to?(:durations)
 
