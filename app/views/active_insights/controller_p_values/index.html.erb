@@ -1,0 +1,26 @@
+<header>
+  <h1><%= params[:formatted_controller] %> metrics for <%= display_date(@date.first) %> (in ms)</h1>
+  <%= form_with url: active_insights.controller_p_values_redirection_path, method: :get do |f| %>
+    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
+    <% f.submit "submit", class: "hidden" %>
+  <% end %>
+</header>
+
+<div class="p-16px">
+  <%= line_chart [{ name: "p50", data: @p50 }, { name: "p95", data: @p95 }, { name: "p99", data: @p99 }], height: "80%", colors: ["rgb(255, 249, 216)", "green", "#C00"], library: {
+    plugins: { zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgba(225,225,225,0.5)' }, mode: 'x' } }, decimation: { enabled: true, algorithm: 'lttb' } },
+    elements: { point: { radius: 0 } },
+    scales: {
+      x: { autoSkip: false, display: false },
+      y: { grid: { display: false }, ticks: { color: "white" }, min: (@p50.map(&:second).min * 0.98).ceil, max: (@p99.map(&:second).max) }
+    } } %>
+</div>
+
+<script>
+  document.addEventListener('keydown',(event) => {
+    const chart = Chartkick.charts[Object.keys(Chartkick.charts)[0]].getChartObject()
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      chart.resetZoom()
+    }
+  });
+</script>

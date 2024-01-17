@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  mount ActiveMetrics::Engine => "/metrics"
+  mount ActiveInsights::Engine => "/insights"
   resources :make_requests, only: :index
 end

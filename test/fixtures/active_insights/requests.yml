@@ -1,0 +1,20 @@
+one:
+  controller: ActiveInsights::ControllerPValuesController
+  action: index
+  format: html
+  http_method: GET
+  path:
+  status: 200
+  view_runtime: 6.097999983467162
+  db_runtime: 75.22500003688037
+  started_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: <%= Date.current.to_s %> 00:05:21.474361000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: <%= Date.current.to_s %> 00:05:21.474361000 Z
+  finished_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: <%= Date.current.to_s %> 00:05:21.628042000 Z
+    zone: *1
+    time: <%= Date.current.to_s %> 00:05:21.628042000 Z
+  uuid: 66218413e477a26ff1d8
+  duration: 153.681

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "activemetrics"
+require "active_insights"
 
-ActiveMetrics::Engine.importmap.draw do
-  pin "application", to: "active_metrics/application.js"
+ActiveInsights::Engine.importmap.draw do
+  pin "application", to: "active_insights/application.js"
 
   pin "chartkick", to: "chartkick.js"
   pin "Chart.bundle", to: "Chart.bundle.js"

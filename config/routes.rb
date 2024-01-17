@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveMetrics::Engine.routes.draw do
+ActiveInsights::Engine.routes.draw do
   resources :requests, only: %i(index)
   get "/requests/:date", to: "requests#index"
   get "/requests/rpm/redirection", to: "rpm#redirection", as: :rpm_redirection
