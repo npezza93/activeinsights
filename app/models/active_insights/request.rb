@@ -10,7 +10,7 @@ module ActiveInsights
         select("STRING_AGG(CAST(duration AS varchar), ',') AS durations")
       end
     }
-    scope :group_by_minute, lambda {
+    scope :minute_by_minute, lambda {
       case connection.adapter_name
       when "SQLite"
         group("strftime('%Y-%m-%d %H:%M:00 UTC', " \

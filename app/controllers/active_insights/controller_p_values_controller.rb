@@ -19,7 +19,7 @@ module ActiveInsights
       @minutes ||=
         ActiveInsights::Request.where(started_at: @date).
         where(formatted_controller: params[:formatted_controller]).
-        group_by_minute.with_durations.select_started_at
+        minute_by_minute.with_durations.select_started_at
     end
   end
 end
