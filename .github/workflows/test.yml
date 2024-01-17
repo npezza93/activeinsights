@@ -46,6 +46,7 @@ jobs:
         sudo apt-get -yqq install libpq-dev
         bundle install
         mv test/dummy/config/database.pg.yml test/dummy/config/database.yml
+        bin/rails db:create db:test:prepare
     - name: Run tests
       run: bin/test
 
