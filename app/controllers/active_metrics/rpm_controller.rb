@@ -5,7 +5,7 @@ module ActiveMetrics
     def index
       @minutes =
         ActiveMetrics::Request.where(started_at: @date).
-        group_by_minute.select("COUNT(id) AS rpm").select(:started_at).
+        group_by_minute.select("COUNT(id) AS rpm").select_started_at.
         map { |minute| [minute.started_at.strftime("%-l:%M%P"), minute.rpm] }
     end
 

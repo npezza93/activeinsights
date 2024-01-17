@@ -19,7 +19,7 @@ module ActiveMetrics
       @minutes ||=
         ActiveMetrics::Request.where(started_at: @date).
         where(formatted_controller: params[:formatted_controller]).
-        group_by_minute.with_durations.select(:started_at)
+        group_by_minute.with_durations.select_started_at
     end
   end
 end

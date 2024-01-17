@@ -24,6 +24,16 @@ module ActiveMetrics
               "AT TIME ZONE 'Etc/UTC'")
       end
     }
+    scope :select_started_at, lambda {
+      case connection.adapter_name
+      when "SQLite", "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
+        select(:started_at)
+      when "PostgreSQL"
+        select("DATE_TRUNC('minute', \"active_metrics_requests\"." \
+               "\"started_at\"::timestamptz AT TIME ZONE 'Etc/UTC') " \
+               "AT TIME ZONE 'Etc/UTC' as started_at")
+      end
+    }
 
     def agony
       parsed_durations.sum
