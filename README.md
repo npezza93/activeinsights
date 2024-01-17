@@ -1,8 +1,17 @@
 # ActiveMetrics
-Short description and motivation.
 
-## Usage
-How to use my plugin.
+One of the fundemental tools needed to take your Rails app to production is a
+way to track response times. Unfortunately, theres no free, easy,
+open source way to track them for small or medium apps. Skylight, Honeybadger,
+Sentry, and AppSignal are great, but they are are closed source and
+there should be an easy open source alternative where you control the data.
+
+ActiveMetrics hooks into the ActiveSupport [instrumention](https://guides.rubyonrails.org/active_support_instrumentation.html#) baked directly into Rails. ActiveMetrics tracks RPM, RPM per controller, and p50/p95/p99 response times and charts all those by the minute.
+
+![screenshot 1](https://github.com/npezza93/activemetrics/blob/main/.github/screenshot1.png)
+![screenshot 2](https://github.com/npezza93/activemetrics/blob/main/.github/screenshot2.png)
+![screenshot 3](https://github.com/npezza93/activemetrics/blob/main/.github/screenshot3.png)
+![screenshot 4](https://github.com/npezza93/activemetrics/blob/main/.github/screenshot4.png)
 
 ## Installation
 Add this line to your application's Gemfile:
