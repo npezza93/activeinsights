@@ -10,16 +10,19 @@ module ActiveInsights
     private
 
     def set_date
-      @date = if params[:date].present?
-                starting = Date.parse(params[:date])
-                starting..([starting.end_of_day, Time.current].min)
-              else
-                Date.current..([Date.current.end_of_day, Time.current].min)
-              end
+      @date = requested_date..([requested_date.end_of_day, Time.current].min)
     end
 
     def setup_time_zone(&block) # rubocop:disable Style/ArgumentsForwarding
       Time.use_zone("Eastern Time (US & Canada)", &block) # rubocop:disable Style/ArgumentsForwarding
+    end
+
+    def requested_date
+      if params[:date].present?
+        Date.parse(params[:date])
+      else
+        Date.current
+      end.beginning_of_day
     end
   end
 end
