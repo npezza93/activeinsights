@@ -9,7 +9,7 @@
 <div class="pl-30px pt-30px flex flex-row justify-around font-size-30">
   <% @requests.flat_map(&:parsed_durations).tap do |durations| %>
     <%= link_to rpm_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
-      <div><%= per_minute(durations.size, 24.hours) %></div>
+      <div><%= per_minute(durations.size, (@date.last - @date.first).seconds) %></div>
       <b>RPM</b>
     <% end %>
 
@@ -44,7 +44,7 @@
     <% @requests.sort_by(&:agony).reverse.each do |model| %>
       <tr>
         <td><%= link_to model.formatted_controller, controller_p_values_path(@date.first.to_date, model.formatted_controller) %></td>
-        <td><%= per_minute(model.parsed_durations.size, 24.hours) %></td>
+        <td><%= per_minute(model.parsed_durations.size, (@date.last - @date.first).seconds) %></td>
         <td><%= model.p50 %> ms</td>
         <td><%= model.p95 %> ms</td>
         <td><%= model.p99 %> ms</td>

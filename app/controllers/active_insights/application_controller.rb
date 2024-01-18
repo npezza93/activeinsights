@@ -10,12 +10,12 @@ module ActiveInsights
     private
 
     def set_date
-      @date =
-        if params[:date].present?
-          Date.parse(params[:date])
-        else
-          Date.current
-        end.all_day
+      @date = if params[:date].present?
+                starting = Date.parse(params[:date])
+                starting..([starting.end_of_day, Time.current].min)
+              else
+                Date.current..([Date.current.end_of_day, Time.current].min)
+              end
     end
 
     def setup_time_zone(&block) # rubocop:disable Style/ArgumentsForwarding
