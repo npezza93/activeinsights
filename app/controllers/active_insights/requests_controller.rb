@@ -7,7 +7,7 @@ module ActiveInsights
         ActiveInsights::Request.where(started_at: @date).
         with_durations.select(:formatted_controller).
         group(:formatted_controller).
-        sort_by { |model| model.durations.count(",") + 1 }.reverse
+        sort_by(&:agony).reverse
     end
   end
 end

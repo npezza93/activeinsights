@@ -4,10 +4,12 @@ module ActiveInsights
   class Request < ::ActiveInsights::Record
     scope :with_durations, lambda {
       case connection.adapter_name
-      when "SQLite", "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
-        select("GROUP_CONCAT(duration) AS durations")
+      when "SQLite"
+        select("JSON_GROUP_ARRAY(duration) AS durations")
+      when "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
+        select("JSON_ARRAYAGG(duration) AS durations")
       when "PostgreSQL"
-        select("STRING_AGG(CAST(duration AS varchar), ',') AS durations")
+        select("JSON_AGG(duration) AS durations")
       end
     }
     scope :minute_by_minute, lambda {
@@ -42,7 +44,11 @@ module ActiveInsights
     def parsed_durations
       return unless respond_to?(:durations)
 
-      @parsed_durations ||= durations.split(",").map(&:to_f).sort
+      @parsed_durations ||=
+        if durations.is_a?(Array) then durations
+        else
+          JSON.parse(durations)
+        end.sort
     end
 
     def pretty_started_at
