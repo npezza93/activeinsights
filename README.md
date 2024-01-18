@@ -45,13 +45,13 @@ You can supply a hash of connection options to `connects_to` set the connection
 options for the `Request` model.
 
 ```ruby
-ActiveInsights.connects_to = { database: { writing: :requests, reading: :requests } }
+config.active_insights.connects_to = { database: { writing: :requests, reading: :requests } }
 ```
 
 You can supply an array of ignored endpoints
 
 ```ruby
-ActiveInsights.ignored_endpoints = ["Rails::HealthController#show"]
+config.active_insights.ignored_endpoints = ["Rails::HealthController#show"]
 ```
 
 ## Development
