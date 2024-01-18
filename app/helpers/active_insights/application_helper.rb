@@ -39,7 +39,7 @@ module ActiveInsights
     private
 
     def percentile_value(data, percentile)
-      value = data[(percentile * data.size).ceil - 1]
+      value = data.sort[(percentile * data.size).ceil - 1]
 
       value&.round(1) || "N/A"
     end
