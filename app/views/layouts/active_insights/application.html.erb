@@ -6,6 +6,21 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= active_insights_importmap_tags %>
+  <script type="module">
+    import {Chart, registerables} from "chart.js";
+
+    Chart.register(...registerables);
+
+    import "chartjs-adapter-date-fns";
+    import zoomPlugin from "chartjs-plugin-zoom";
+    import Chartkick from "chartkick";
+
+    window.Chartkick = Chartkick;
+    window.Chart = Chart;
+
+    Chartkick.use(Chart);
+    Chart.register(zoomPlugin);
+  </script>
 
   <title>Active Insights</title>
   <style>

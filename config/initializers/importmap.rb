@@ -3,8 +3,6 @@
 require "active_insights"
 
 ActiveInsights::Engine.importmap.draw do
-  pin "application", to: "active_insights/application.js"
-
   pin "chartkick", to: "https://ga.jspm.io/npm:chartkick@5.0.1/dist/chartkick.esm.js"
   pin "chart.js", to: "https://ga.jspm.io/npm:chart.js@4.4.1/dist/chart.js"
   pin "chartjs-adapter-date-fns", to: "https://ga.jspm.io/npm:chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.esm.js"
