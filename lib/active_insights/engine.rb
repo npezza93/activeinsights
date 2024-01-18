@@ -11,6 +11,14 @@ module ActiveInsights
         end
     end
 
+    config.active_insights = ActiveSupport::OrderedOptions.new
+
+    initializer "active_insights.config" do
+      config.active_insights.each do |name, value|
+        ActiveInsights.public_send(:"#{name}=", value)
+      end
+    end
+
     initializer "active_insights.importmap", before: "importmap" do |app|
       app.config.importmap.paths <<
         Engine.root.join("config/initializers/importmap.rb")
