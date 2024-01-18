@@ -15,9 +15,7 @@ module ActiveInsights
     private
 
     def minutes
-      @minutes ||=
-        ActiveInsights::Request.where(started_at: @date).
-        minute_by_minute.with_durations.select_started_at
+      @minutes ||= base_scope.minute_by_minute.with_durations.select_started_at
     end
   end
 end

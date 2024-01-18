@@ -48,6 +48,12 @@ options for the `Request` model.
 ActiveInsights.connects_to = { database: { writing: :requests, reading: :requests } }
 ```
 
+You can supply an array of ignored endpoints
+
+```ruby
+ActiveInsights.ignored_endpoints = ["Rails::HealthController#show"]
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run

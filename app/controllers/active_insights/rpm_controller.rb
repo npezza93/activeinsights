@@ -4,9 +4,10 @@ module ActiveInsights
   class RpmController < ApplicationController
     def index
       @minutes =
-        ActiveInsights::Request.where(started_at: @date).
-        minute_by_minute.select("COUNT(id) AS rpm").select_started_at.
-        map { |minute| [minute.started_at.strftime("%-l:%M%P"), minute.rpm] }
+        base_scope.minute_by_minute.select("COUNT(id) AS rpm").
+        select_started_at.map do |minute|
+          [minute.started_at.strftime("%-l:%M%P"), minute.rpm]
+        end
     end
 
     def redirection

@@ -17,8 +17,7 @@ module ActiveInsights
 
     def minutes
       @minutes ||=
-        ActiveInsights::Request.where(started_at: @date).
-        where(formatted_controller: params[:formatted_controller]).
+        base_scope.where(formatted_controller: params[:formatted_controller]).
         minute_by_minute.with_durations.select_started_at
     end
   end
