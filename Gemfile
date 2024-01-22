@@ -22,4 +22,6 @@ group :development, :test do
   gem "stimulus-rails"
 
   gem "rubystats"
+
+  gem "solid_queue"
 end
