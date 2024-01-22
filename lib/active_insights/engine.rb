@@ -33,15 +33,12 @@ module ActiveInsights
 
         Thread.new do
           ActiveRecord::Base.connection_pool.with_connection do
-            ActiveInsights::Request.create!(
-              started_at: started, finished_at: finished, uuid: unique_id,
-              duration: (finished - started) * 1000.0,
-              controller: payload[:controller],
-              action: payload[:action], format: payload[:format],
-              http_method: payload[:method], status: payload[:status],
-              view_runtime: payload[:view_runtime],
-              db_runtime: payload[:db_runtime]
-            )
+            ActiveInsights::Request.
+              setup(started, finished, unique_id, payload).
+              create!(controller: payload[:controller],
+                      action: payload[:action], format: payload[:format],
+                      http_method: payload[:method], status: payload[:status],
+                      view_runtime: payload[:view_runtime])
           end
         end
       end
