@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ActiveInsights < ActiveRecord::Migration[7.1]
+class CreateActiveInsightsTables < ActiveRecord::Migration[7.1]
   def change
     create_table :active_insights_requests, if_not_exists: true do |t|
       t.string :controller
