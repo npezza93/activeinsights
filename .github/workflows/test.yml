@@ -72,7 +72,7 @@ jobs:
         sudo service mysql start
         sudo mysqladmin -proot password ''
         mv test/dummy/config/database.trilogy.yml test/dummy/config/database.yml
-        bin/rails db:create db:test:prepare
+        bin/rails db:drop db:create db:migrate
         mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
     - name: Run tests
       run: bin/test
