@@ -22,9 +22,9 @@ module ActiveInsights
         group("strftime('%Y-%m-%d %H:%M:00 UTC', " \
               "'#{table_name}'.'started_at')")
       when "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
-        group("CONVERT_TZ(DATE_FORMAT(`#{table_name.split('.').map do |arg|
+        group("CONVERT_TZ(DATE_FORMAT(#{table_name.split('.').map do |arg|
                                            "`#{arg}`"
-                                         end.join('.')}`.`started_at`" \
+                                         end.join('.')}.`started_at`" \
               ", '%Y-%m-%d %H:%i:00'), 'Etc/UTC', '+00:00')")
       when "PostgreSQL"
         group("DATE_TRUNC('minute', \"#{table_name}\"." \
