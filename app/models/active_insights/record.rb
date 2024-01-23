@@ -20,12 +20,12 @@ module ActiveInsights
       case connection.adapter_name
       when "SQLite"
         group("strftime('%Y-%m-%d %H:%M:00 UTC', " \
-              "'active_insights_requests'.'started_at')")
+              "'#{table_name}'.'started_at')")
       when "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
-        group("CONVERT_TZ(DATE_FORMAT(`active_insights_requests`.`started_at`" \
+        group("CONVERT_TZ(DATE_FORMAT(`#{table_name}`.`started_at`" \
               ", '%Y-%m-%d %H:%i:00'), 'Etc/UTC', '+00:00')")
       when "PostgreSQL"
-        group("DATE_TRUNC('minute', \"active_insights_requests\"." \
+        group("DATE_TRUNC('minute', \"#{table_name}\"." \
               "\"started_at\"::timestamptz AT TIME ZONE 'Etc/UTC') " \
               "AT TIME ZONE 'Etc/UTC'")
       end
@@ -35,7 +35,7 @@ module ActiveInsights
       when "SQLite", "Mysql2", "Mysql2Spatial", "Mysql2Rgeo", "Trilogy"
         select(:started_at)
       when "PostgreSQL"
-        select("DATE_TRUNC('minute', \"active_insights_requests\"." \
+        select("DATE_TRUNC('minute', \"#{table_name}\"." \
                "\"started_at\"::timestamptz AT TIME ZONE 'Etc/UTC') " \
                "AT TIME ZONE 'Etc/UTC' as started_at")
       end

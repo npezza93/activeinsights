@@ -1,0 +1,26 @@
+<header>
+  <h1>JPM Metrics for <%= display_date(@date.first) %></h1>
+  <%= form_with url: active_insights.jpm_redirection_path, method: :get do |f| %>
+    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
+    <% f.submit "submit", class: "hidden" %>
+  <% end %>
+</header>
+
+<div class="p-16px">
+  <%= column_chart @minutes, height: "80%", colors: ["#C00"], library: {
+    borderSkipped: true, barPercentage: 1, categoryPercentage: 1,
+    plugins: { zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgba(225,225,225,0.5)' }, mode: 'x' } } },
+    scales: {
+      x: { barPercentage: 1.0, autoSkip: false, display: false },
+      y: { grid: { display: false }, ticks: { color: "white" }, min: (@minutes.map(&:second).min.to_f * 0.98).ceil, max: (@minutes.map(&:second).max) }
+    } } %>
+</div>
+
+<script>
+  document.addEventListener('keydown',(event) => {
+    const chart = Chartkick.charts[Object.keys(Chartkick.charts)[0]].getChartObject()
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      chart.resetZoom()
+    }
+  });
+</script>
