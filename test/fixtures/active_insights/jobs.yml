@@ -1,10 +1,10 @@
 one:
   job: DummyJob
-  db_runtime: 75.22500003688037
+  db_runtime: 75.225
   scheduled_at: <%= Date.current.to_time.change(hour: 9) %>
   started_at: <%= Date.current.to_time.change(hour: 10) %>
   finished_at: <%= Date.current.to_time.change(hour: 10, min: 10) %>
   uuid: 66218413e477a26ff1d8
   duration: 153.681
   queue: default
-  queue_time: 100.0
+  queue_time: 100.011
