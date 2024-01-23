@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveInsights::Engine.routes.draw do
+ActiveInsights::Engine.routes.draw do # rubocop:disable Metrics/BlockLength
   resources :requests, only: %i(index)
   resources :jobs, only: %i(index)
   get "/jobs/:date", to: "jobs#index"
@@ -25,11 +25,14 @@ ActiveInsights::Engine.routes.draw do
                                     as: :jobs_p_values_redirection
   get "/jobs/:date/p_values", to: "jobs_p_values#index", as: :jobs_p_values
 
-  get "/jobs/:date/:job/p_values",
-      to: "jobs_p_values#index", as: :job_p_values
+  get "/jobs/:date/:job/p_values", to: "jobs_p_values#index", as: :job_p_values
   get "/jobs/:job/p_values/redirection",
       to: "jobs_p_values#redirection",
       as: :job_p_values_redirection
+
+  get "/jobs/:date/latencies", to: "jobs_latencies#index", as: :jobs_latency
+  get "/jobs/latencies/redirection", to: "jobs_latencies#redirection",
+                                     as: :jobs_latency_redirection
 
   root "requests#index"
 end

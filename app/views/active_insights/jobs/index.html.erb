@@ -31,6 +31,11 @@
       <div><%= p99(durations) %> ms</div>
       <b>p99</b>
     <% end %>
+
+    <%= link_to jobs_latency_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+      <div><%= @latency.round(1) %> ms</div>
+      <b>Latency</b>
+    <% end %>
   <% end %>
 </div>
 
