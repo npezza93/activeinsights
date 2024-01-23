@@ -10,6 +10,7 @@ AllCops:
     - node_modules/**/*
     - tmp/**/*
     - test/dummy/db/schema.rb
+    - test/dummy/db/migrate/**/*
     - test/dummy/config/**/*
     - test/dummy/bin/**/*
     - gemfiles/**/*
