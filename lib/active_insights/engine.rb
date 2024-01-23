@@ -24,7 +24,15 @@ module ActiveInsights
         Engine.root.join("config/initializers/importmap.rb")
     end
 
-    initializer "active_insights.subscriber" do |_app|
+    initializer "active_insights.job_subscriber" do
+      ActiveSupport::Notifications.
+        subscribe("perform.active_job") do |_name,
+          started, finished, unique_id, payload|
+          ActiveInsights::Job.setup(started, finished, unique_id, payload)
+        end
+    end
+
+    initializer "active_insights.request_subscriber" do
       ActiveSupport::Notifications.
         subscribe("process_action.action_controller") do |_name,
           started, finished, unique_id, payload|
@@ -34,11 +42,7 @@ module ActiveInsights
         Thread.new do
           ActiveRecord::Base.connection_pool.with_connection do
             ActiveInsights::Request.
-              setup(started, finished, unique_id, payload).
-              create!(controller: payload[:controller],
-                      action: payload[:action], format: payload[:format],
-                      http_method: payload[:method], status: payload[:status],
-                      view_runtime: payload[:view_runtime])
+              setup(started, finished, unique_id, payload)
           end
         end
       end

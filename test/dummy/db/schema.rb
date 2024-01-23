@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_11_225806) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_160406) do
+  create_table "active_insights_jobs", force: :cascade do |t|
+    t.string "job"
+    t.integer "status"
+    t.float "db_runtime"
+    t.datetime "scheduled_at"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.string "uuid"
+    t.float "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["started_at", "duration"], name: "index_active_insights_jobs_on_started_at_and_duration"
+    t.index ["started_at"], name: "index_active_insights_jobs_on_started_at"
+  end
+
   create_table "active_insights_requests", force: :cascade do |t|
     t.string "controller"
     t.string "action"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ActiveInsightsRequest < ActiveRecord::Migration[7.1]
+class ActiveInsights < ActiveRecord::Migration[7.1]
   def change
     create_table :active_insights_requests, if_not_exists: true do |t|
       t.string :controller
@@ -25,6 +25,22 @@ class ActiveInsightsRequest < ActiveRecord::Migration[7.1]
       t.index :started_at
       t.index %i(started_at duration)
       t.index %i(started_at formatted_controller)
+
+      t.timestamps
+    end
+
+    create_table :active_insights_jobs, if_not_exists: true do |t|
+      t.string :job
+      t.integer :status
+      t.float :db_runtime
+      t.datetime :scheduled_at
+      t.datetime :started_at
+      t.datetime :finished_at
+      t.string :uuid
+      t.float :duration
+
+      t.index :started_at
+      t.index %i(started_at duration)
 
       t.timestamps
     end

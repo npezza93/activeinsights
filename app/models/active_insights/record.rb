@@ -41,10 +41,8 @@ module ActiveInsights
       end
     }
 
-    def self.setup(started, finished, unique_id, payload)
-      new(started_at: started, finished_at: finished, uuid: unique_id,
-          duration: (finished - started) * 1000.0,
-          db_runtime: payload[:db_runtime])
+    before_validation do
+      self.duration ||= (finished_at - started_at) * 1000.0
     end
 
     def agony
