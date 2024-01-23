@@ -7,4 +7,4 @@ one:
   uuid: 66218413e477a26ff1d8
   duration: 153.681
   queue: default
-  queue_time: 100
+  queue_time: 100.0
