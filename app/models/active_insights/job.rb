@@ -10,7 +10,12 @@ module ActiveInsights
     end
 
     before_validation do
-      self.queue_time ||= (started_at - scheduled_at) * 1000.0
+      self.queue_time ||=
+        if scheduled_at.blank?
+          0.0
+        else
+          (started_at - scheduled_at) * 1000.0
+        end
     end
   end
 end
