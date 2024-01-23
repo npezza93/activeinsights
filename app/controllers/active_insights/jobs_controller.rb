@@ -7,7 +7,7 @@ module ActiveInsights
               group(:job, :queue).sort_by(&:agony).reverse
 
       @latency =
-        base_jobs_scope.select("AVG(queue_time) as latency").first.latency
+        base_jobs_scope.select("AVG(queue_time) as latency").to_a.first.latency
     end
   end
 end
