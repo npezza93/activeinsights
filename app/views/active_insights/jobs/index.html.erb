@@ -48,7 +48,7 @@
   <tbody>
     <% @jobs.each do |model| %>
       <tr>
-        <td><%= link_to model.job, jobs_p_values_path(@date.first.to_date, model.job) %></td>
+        <td><%= link_to model.job, job_p_values_path(@date.first.to_date, model.job) %></td>
         <td><%= model.queue %></td>
         <td><%= per_minute(model.parsed_durations.size, (@date.last - @date.first).seconds) %></td>
         <td><%= model.p50 %> ms</td>

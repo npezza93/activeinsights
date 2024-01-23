@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 require "rubystats"
 
 module ActiveInsights
@@ -64,3 +65,4 @@ module ActiveInsights
     end
   end
 end
+# :nocov:
