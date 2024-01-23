@@ -4,7 +4,7 @@ module ActiveInsights
   class JobsController < ApplicationController
     def index
       @jobs = base_jobs_scope.with_durations.select(:job, :queue).
-              group(:job).sort_by(&:agony).reverse
+              group(:job, :queue).sort_by(&:agony).reverse
     end
   end
 end
