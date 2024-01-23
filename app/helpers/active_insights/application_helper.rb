@@ -32,7 +32,7 @@ module ActiveInsights
     end
 
     def per_minute(amount, duration)
-      (amount / duration.in_minutes).round(0)
+      (amount / duration.in_minutes).round(1)
     end
 
     private

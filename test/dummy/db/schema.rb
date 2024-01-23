@@ -13,7 +13,6 @@
 ActiveRecord::Schema[7.1].define(version: 2024_01_22_154439) do
   create_table "active_insights_jobs", force: :cascade do |t|
     t.string "job"
-    t.integer "status"
     t.float "db_runtime"
     t.datetime "scheduled_at"
     t.datetime "started_at"
@@ -22,6 +21,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_154439) do
     t.float "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "queue"
+    t.float "queue_time"
+    t.index ["started_at", "duration", "queue_time"], name: "idx_on_started_at_duration_queue_time_010695b74f"
+    t.index ["started_at", "duration"], name: "idx_on_started_at_duration_latency_a9b54bbf04"
     t.index ["started_at", "duration"], name: "index_active_insights_jobs_on_started_at_and_duration"
     t.index ["started_at"], name: "index_active_insights_jobs_on_started_at"
   end

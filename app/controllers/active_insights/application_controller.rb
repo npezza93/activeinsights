@@ -25,13 +25,17 @@ module ActiveInsights
       end.beginning_of_day
     end
 
-    def base_scope
+    def base_request_scope
       scope = ActiveInsights::Request.where(started_at: @date)
       if ActiveInsights.ignored_endpoints.present?
         scope = scope.where.
                 not(formatted_controller: ActiveInsights.ignored_endpoints)
       end
       scope
+    end
+
+    def base_jobs_scope
+      ActiveInsights::Job.where(started_at: @date)
     end
   end
 end

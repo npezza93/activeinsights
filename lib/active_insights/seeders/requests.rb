@@ -3,7 +3,7 @@
 require "rubystats"
 
 module ActiveInsights
-  class Seeder
+  class RequestSeeder
     def initialize(date, rpm, p50, p95, p99)
       @date = date
       @rpm = rpm

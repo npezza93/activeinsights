@@ -1,9 +1,13 @@
 <header>
   <h1>Metrics for <%= display_date(@date.first) %></h1>
-  <%= form_with url: active_insights.requests_path, method: :get do |f| %>
-    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
-    <% f.submit "submit", class: "hidden" %>
-  <% end %>
+  <div class="flex flex-row items-center">
+    <%= link_to "View job metrics", active_insights.jobs_path, class: "white mr-15px" %>
+
+    <%= form_with url: active_insights.requests_path, method: :get do |f| %>
+      <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
+      <% f.submit "submit", class: "hidden" %>
+    <% end %>
+  </div>
 </header>
 
 <div class="pl-30px pt-30px flex flex-row justify-around font-size-30">
@@ -13,17 +17,17 @@
       <b>RPM</b>
     <% end %>
 
-    <%= link_to p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to requests_p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
       <div><%= p50(durations) %> ms</div>
       <b>p50</b>
     <% end %>
 
-    <%= link_to p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to requests_p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
       <div><%= p95(durations) %> ms</div>
       <b>p95</b>
     <% end %>
 
-    <%= link_to p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to requests_p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
       <div><%= p99(durations) %> ms</div>
       <b>p99</b>
     <% end %>

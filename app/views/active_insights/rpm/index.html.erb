@@ -12,7 +12,7 @@
     plugins: { zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgba(225,225,225,0.5)' }, mode: 'x' } } },
     scales: {
       x: { barPercentage: 1.0, autoSkip: false, display: false },
-      y: { grid: { display: false }, ticks: { color: "white" }, min: (@minutes.map(&:second).min * 0.98).ceil, max: (@minutes.map(&:second).max) }
+      y: { grid: { display: false }, ticks: { color: "white" }, min: (@minutes.map(&:second).min.to_f * 0.98).ceil, max: (@minutes.map(&:second).max) }
     } } %>
 </div>
 

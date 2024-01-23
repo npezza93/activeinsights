@@ -31,16 +31,18 @@ class ActiveInsights < ActiveRecord::Migration[7.1]
 
     create_table :active_insights_jobs, if_not_exists: true do |t|
       t.string :job
-      t.integer :status
+      t.string :queue
       t.float :db_runtime
       t.datetime :scheduled_at
       t.datetime :started_at
       t.datetime :finished_at
       t.string :uuid
       t.float :duration
+      t.float :queue_time
 
       t.index :started_at
       t.index %i(started_at duration)
+      t.index %i(started_at duration queue_time)
 
       t.timestamps
     end
