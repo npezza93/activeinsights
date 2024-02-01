@@ -6,9 +6,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 group :development, :test do
+  gem "activerecord-enhancedsqlite3-adapter"
   gem "pg"
   gem "simplecov"
-  gem "sqlite3"
   gem "trilogy"
 
   gem "rubocop"
