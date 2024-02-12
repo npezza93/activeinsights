@@ -36,7 +36,7 @@ $ gem install activeinsights
 
 And then install migrations:
 ```bash
-bin/rails active_insights:install
+bin/rails g active_insights:install
 bin/rails rails db:migrate
 ```
 
