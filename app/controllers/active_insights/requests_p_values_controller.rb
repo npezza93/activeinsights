@@ -6,6 +6,8 @@ module ActiveInsights
       @p50 = minutes.map{ |minute| [minute.pretty_started_at, minute.p50] }
       @p95 = minutes.map{ |minute| [minute.pretty_started_at, minute.p95] }
       @p99 = minutes.map{ |minute| [minute.pretty_started_at, minute.p99] }
+
+      fetch_rpm
     end
 
     def redirection
@@ -30,6 +32,15 @@ module ActiveInsights
 
     def formatted_controller
       params[:formatted_controller].presence
+    end
+
+    def fetch_rpm
+      return if formatted_controller.blank?
+
+      @rpm =
+        minutes.select("COUNT(id) AS rpm").map do |minute|
+          [minute.started_at.strftime("%-l:%M%P"), minute.rpm]
+        end
     end
   end
 end

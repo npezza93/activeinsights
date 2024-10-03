@@ -15,7 +15,7 @@ AllCops:
     - test/dummy/bin/**/*
     - gemfiles/**/*
     - bin/**/*
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.2
 
 # Department Bundler
 Bundler/DuplicatedGem:

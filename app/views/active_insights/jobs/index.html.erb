@@ -1,10 +1,10 @@
 <header>
   <h1>Metrics for <%= display_date(@date.first) %></h1>
   <div class="flex flex-row items-center">
-    <%= link_to "View request metrics", active_insights.requests_path, class: "white mr-15px" %>
+    <%= link_to "View request metrics", active_insights.requests_path, class: "link calibre mr-15px" %>
 
     <%= form_with url: active_insights.jobs_path, method: :get do |f| %>
-      <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
+      <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", class: "datepicker", value: @date.first.to_date %>
       <% f.submit "submit", class: "hidden" %>
     <% end %>
   </div>
@@ -12,27 +12,27 @@
 
 <div class="pl-30px pt-30px flex flex-row justify-around font-size-30">
   <% @jobs.flat_map(&:parsed_durations).tap do |durations| %>
-    <%= link_to jpm_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to jpm_path(@date.first.to_date), class: "button calibre red flex flex-col justify-center items-center no-underline" do %>
       <div><%= per_minute(durations.size, (@date.last - @date.first).seconds) %></div>
       <b>JPM</b>
     <% end %>
 
-    <%= link_to jobs_p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to jobs_p_values_path(@date.first.to_date), class: "button calibre red flex flex-col justify-center items-center no-underline" do %>
       <div><%= p50(durations) %> ms</div>
       <b>p50</b>
     <% end %>
 
-    <%= link_to jobs_p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to jobs_p_values_path(@date.first.to_date), class: "button calibre red flex flex-col justify-center items-center no-underline" do %>
       <div><%= p95(durations) %> ms</div>
       <b>p95</b>
     <% end %>
 
-    <%= link_to jobs_p_values_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to jobs_p_values_path(@date.first.to_date), class: "button calibre red flex flex-col justify-center items-center no-underline" do %>
       <div><%= p99(durations) %> ms</div>
       <b>p99</b>
     <% end %>
 
-    <%= link_to jobs_latency_path(@date.first.to_date), class: "flex flex-col justify-center items-center no-underline" do %>
+    <%= link_to jobs_latency_path(@date.first.to_date), class: "button calibre red flex flex-col justify-center items-center no-underline" do %>
       <div><%= @latency.to_f.round(1) %> ms</div>
       <b>Latency</b>
     <% end %>

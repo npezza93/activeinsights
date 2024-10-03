@@ -6,6 +6,8 @@ module ActiveInsights
       @p50 = minutes.map{ |minute| [minute.pretty_started_at, minute.p50] }
       @p95 = minutes.map{ |minute| [minute.pretty_started_at, minute.p95] }
       @p99 = minutes.map{ |minute| [minute.pretty_started_at, minute.p99] }
+
+      fetch_jpm
     end
 
     def redirection
@@ -28,6 +30,15 @@ module ActiveInsights
 
     def job
       params[:job].presence
+    end
+
+    def fetch_jpm
+      return if job.blank?
+
+      @jpm =
+        minutes.select("COUNT(id) AS jpm").map do |minute|
+          [minute.started_at.strftime("%-l:%M%P"), minute.jpm]
+        end
     end
   end
 end

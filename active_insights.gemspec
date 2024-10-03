@@ -14,11 +14,11 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
 
   spec.metadata["rubygems_mfa_required"] = "true"
-  spec.required_ruby_version = ">= 3.1.0"
+  spec.required_ruby_version = ">= 3.2.0"
   spec.files = Dir["{app,config,db,lib,vendor}/**/*", "LICENSE.md",
                    "Rakefile", "README.md"]
 
   spec.add_dependency "chartkick"
   spec.add_dependency "importmap-rails"
-  spec.add_dependency "rails", ">= 7.1"
+  spec.add_dependency "rails", ">= 7.2"
 end

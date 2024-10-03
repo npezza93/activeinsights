@@ -34,9 +34,13 @@ module ActiveInsights
     end
 
     def processing_times
-      Array.new(rpm) do
+      Array.new(calculate_rpm) do
         p50 + (beta_distribution.rng * (p95 - p50))
       end.select { |time| time <= p99 }
+    end
+
+    def calculate_rpm
+      (rpm * 0.9) + (rpm * 0.2 * rand)
     end
 
     def beta_distribution

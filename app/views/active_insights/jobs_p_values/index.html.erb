@@ -1,32 +1,37 @@
 <header>
   <% if params[:job].present? %>
-    <h1><%= params[:job] %> metrics for <%= display_date(@date.first) %> (in ms)</h1>
+    <h1><%= params[:job] %> metrics for <%= display_date(@date.first) %></h1>
   <% else %>
     <h1>Job Metrics for <%= display_date(@date.first) %> (in ms)</h1>
   <% end %>
 
   <%= form_with url: active_insights.jobs_p_values_redirection_path, method: :get do |f| %>
     <%= f.hidden_field :job, value: params[:job] %>
-    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
+    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", class: "datepicker", value: @date.first.to_date %>
     <% f.submit "submit", class: "hidden" %>
   <% end %>
 </header>
 
-<div class="p-16px">
-  <%= line_chart [{ name: "p50", data: @p50 }, { name: "p95", data: @p95 }, { name: "p99", data: @p99 }], height: "80%", colors: ["rgb(255, 249, 216)", "green", "#C00"], library: {
-    plugins: { zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgba(225,225,225,0.5)' }, mode: 'x' } }, decimation: { enabled: true, algorithm: 'lttb' } },
+<div class="p-16px flex items-center">
+  <h1 class="red calibre text-center w-175px">Response Times <br> (in ms)</h1>
+  <%= line_chart [{ name: "p50", data: @p50 }, { name: "p95", data: @p95 }, { name: "p99", data: @p99 }], height: "500px", colors: ["#C00", "rgb(223, 180, 115)", "#000"], library: {
+    plugins: { legend: { position: "bottom" }, tooltip: { backgroundColor: 'rgb(238, 231, 233)', cornerRadius: 5, bodyColor: "#000", bodyAlign: 'center', bodyFont: { size: 20, family: "Calibre" }, titleColor: "#000", titleFont: { size: 20, family: "Calibre" } }, zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgb(238, 231, 233)' }, mode: 'x' } } },
     elements: { point: { radius: 0 } },
     scales: {
-      x: { autoSkip: false, display: false },
-      y: { grid: { display: false }, ticks: { color: "white" }, min: (@p50.map(&:second).min.to_f * 0.98).ceil, max: (@p99.map(&:second).max) }
+      x: { border: { color: "rgb(238, 231, 233)" }, grid: { color: "rgb(238, 231, 233)" }, ticks: { color: "#000", font: { size: 16, family: "Calibre" } }, autoSkip: false, display: true },
+      y: { border: { color: "rgb(238, 231, 233)" }, grid: { display: false }, ticks: { font: { size: 16, family: "Calibre" }, color: "#000" }, min: (@p50.map(&:second).min.to_f * 0.98).ceil, max: (@p99.map(&:second).max) }
     } } %>
 </div>
 
-<script>
-  document.addEventListener('keydown',(event) => {
-    const chart = Chartkick.charts[Object.keys(Chartkick.charts)[0]].getChartObject()
-    if (event.key === 'Escape' || event.key === 'Esc') {
-      chart.resetZoom()
-    }
-  });
-</script>
+<% if @jpm %>
+  <div class="p-16px flex items-center">
+    <h1 class="red calibre text-center w-175px">JPM</h1>
+    <%= column_chart @jpm, height: "400px", colors: ["#C00"], library: {
+      borderSkipped: true, barPercentage: 1, categoryPercentage: 1,
+      plugins: { tooltip: { backgroundColor: 'rgb(238, 231, 233)', cornerRadius: 5, bodyColor: "#000", bodyAlign: 'center', bodyFont: { size: 20, family: "Calibre" }, titleColor: "#000", titleFont: { size: 20, family: "Calibre" } }, zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgb(238, 231, 233)' }, mode: 'x' } } },
+      scales: {
+        x: { border: { color: "rgb(238, 231, 233)" }, barPercentage: 1.0, grid: { color: "rgb(238, 231, 233)" }, ticks: { color: "#000", font: { size: 16, family: "Calibre" } }, autoSkip: false, display: true },
+        y: { border: { color: "rgb(238, 231, 233)" }, grid: { display: false }, ticks: { font: { size: 16, family: "Calibre" }, color: "#000" }, min: (@jpm.map(&:second).min.to_f * 0.98).ceil, max: (@jpm.map(&:second).max) }
+      } } %>
+  </div>
+<% end %>

@@ -1,26 +1,17 @@
 <header>
   <h1>RPM Metrics for <%= display_date(@date.first) %></h1>
   <%= form_with url: active_insights.rpm_redirection_path, method: :get do |f| %>
-    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", value: @date.first.to_date %>
+    <%= f.date_field :date, max: Date.current, onchange: "this.form.submit()", class: "datepicker", value: @date.first.to_date %>
     <% f.submit "submit", class: "hidden" %>
   <% end %>
 </header>
 
-<div class="p-16px">
-  <%= column_chart @minutes, height: "80%", colors: ["#C00"], library: {
+<div class="p-16px flex items-center h-100">
+  <%= column_chart @minutes, height: "400px", colors: ["#C00"], library: {
     borderSkipped: true, barPercentage: 1, categoryPercentage: 1,
-    plugins: { zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgba(225,225,225,0.5)' }, mode: 'x' } } },
+    plugins: { tooltip: { backgroundColor: 'rgb(238, 231, 233)', cornerRadius: 5, bodyColor: "#000", bodyAlign: 'center', bodyFont: { size: 20, family: "Calibre" }, titleColor: "#000", titleFont: { size: 20, family: "Calibre" } }, zoom: { zoom: { wheel: { enabled: false }, drag: { enabled: true, backgroundColor: 'rgb(238, 231, 233)' }, mode: 'x' } } },
     scales: {
-      x: { barPercentage: 1.0, autoSkip: false, display: false },
-      y: { grid: { display: false }, ticks: { color: "white" }, min: (@minutes.map(&:second).min.to_f * 0.98).ceil, max: (@minutes.map(&:second).max) }
+      x: { border: { color: "rgb(238, 231, 233)" }, barPercentage: 1.0, grid: { color: "rgb(238, 231, 233)" }, ticks: { color: "#000", font: { size: 16, family: "Calibre" } }, autoSkip: false, display: true },
+      y: { border: { color: "rgb(238, 231, 233)" }, grid: { display: false }, ticks: { font: { size: 16, family: "Calibre" }, color: "#000" }, min: (@minutes.map(&:second).min.to_f * 0.98).ceil, max: (@minutes.map(&:second).max) }
     } } %>
 </div>
-
-<script>
-  document.addEventListener('keydown',(event) => {
-    const chart = Chartkick.charts[Object.keys(Chartkick.charts)[0]].getChartObject()
-    if (event.key === 'Escape' || event.key === 'Esc') {
-      chart.resetZoom()
-    }
-  });
-</script>

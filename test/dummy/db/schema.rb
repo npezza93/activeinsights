@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_154439) do
+ActiveRecord::Schema[7.2].define(version: 2024_01_22_154439) do
   create_table "active_insights_jobs", force: :cascade do |t|
     t.string "job"
     t.string "queue"
@@ -141,5 +141,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_154439) do
     t.index ["key", "value"], name: "index_solid_queue_semaphores_on_key_and_value"
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
-
 end

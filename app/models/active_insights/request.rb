@@ -9,5 +9,9 @@ module ActiveInsights
                 :db_runtime
       ))
     end
+
+    def percentage(others)
+      (parsed_durations.sum / others.flat_map(&:parsed_durations).sum) * 100.0
+    end
   end
 end
