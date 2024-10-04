@@ -50,7 +50,7 @@
       <tr>
         <td><%= link_to model.formatted_controller, controller_p_values_path(@date.first.to_date, model.formatted_controller) %></td>
         <td><%= per_minute(model.parsed_durations.size, (@date.last - @date.first).seconds) %></td>
-        <td><%= number_to_percentage model.percentage(@requests.excluding(model)), precision: 1 %></td>
+        <td><%= number_to_percentage model.percentage(@requests), precision: 1 %></td>
         <td><%= model.p50 %> ms</td>
         <td><%= model.p95 %> ms</td>
         <td><%= model.p99 %> ms</td>
