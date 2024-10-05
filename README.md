@@ -34,11 +34,18 @@ Or install it yourself as:
 $ gem install activeinsights
 ```
 
-And then install migrations:
+then install migrations:
 ```bash
 bin/rails g active_insights:install
 bin/rails rails db:migrate
 ```
+
+And then add application.css to your manifest.js:
+```bash
+# app/assets/config/manifest.js
+//= link active_insights/application.css
+```
+
 
 This also mounts a route in your routes file to view the insights at `/insights`.
 
