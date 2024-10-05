@@ -34,18 +34,11 @@ Or install it yourself as:
 $ gem install activeinsights
 ```
 
-then install migrations:
+and then install migrations:
 ```bash
 bin/rails g active_insights:install
 bin/rails rails db:migrate
 ```
-
-And then add application.css to your manifest.js:
-```bash
-# app/assets/config/manifest.js
-//= link active_insights/application.css
-```
-
 
 This also mounts a route in your routes file to view the insights at `/insights`.
 
@@ -63,6 +56,12 @@ You can supply an array of ignored endpoints
 
 ```ruby
 config.active_insights.ignored_endpoints = ["Rails::HealthController#show"]
+```
+
+IF you are using sproket add application.css to your manifest.js (not needed for propshaft):
+```bash
+# app/assets/config/manifest.js
+//= link active_insights/application.css
 ```
 
 ## Development
