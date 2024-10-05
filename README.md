@@ -60,7 +60,6 @@ config.active_insights.ignored_endpoints = ["Rails::HealthController#show"]
 
 If you are using Sprockets, add the ActiveInsights css file to manifest.js:
 ```javascript
-# app/assets/config/manifest.js
 //= link active_insights/application.css
 ```
 
