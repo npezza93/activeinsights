@@ -1,10 +1,12 @@
 # ActiveInsights
 
-One of the fundemental tools needed when taking your Rails app to production is
-a way to track response times. Unfortunately, theres no free, easy,
-open source way to track them for small or medium apps. Skylight, Honeybadger,
+One of the fundamental tools needed when taking your Rails app to production is
+a way to track response times. Unfortunately, there aren't many free, easy,
+open source ways to track them for small or medium apps. Skylight, Honeybadger,
 Sentry, AppSignal, etc. are great, but they are are closed source and
 there should be an easy open source alternative where you control the data.
+With Rails 8's ethos of No PAAS, there should be a way for new apps to start out
+with a basic error reporter and not be forced to pay a third party for one.
 
 ActiveInsights hooks into the ActiveSupport [instrumention](https://guides.rubyonrails.org/active_support_instrumentation.html#)
 baked directly into Rails. ActiveInsights tracks RPM, RPM per controller, and
@@ -34,9 +36,9 @@ Or install it yourself as:
 $ gem install activeinsights
 ```
 
-Install run the installer and migrate:
+Run the installer and migrate:
 ```bash
-bin/rails g active_insights:install
+bin/rails active_insights:install
 bin/rails rails db:migrate
 ```
 
