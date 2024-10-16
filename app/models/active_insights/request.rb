@@ -3,7 +3,7 @@
 module ActiveInsights
   class Request < ::ActiveInsights::Record
     def self.setup(started, finished, unique_id, payload)
-      req = paylooad[:request]
+      req = payload[:request]
 
       create!(started_at: started, ip_address: req.remote_ip,
               finished_at: finished, uuid: unique_id,
