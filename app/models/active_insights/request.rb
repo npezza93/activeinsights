@@ -3,9 +3,11 @@
 module ActiveInsights
   class Request < ::ActiveInsights::Record
     def self.setup(started, finished, unique_id, payload)
-      create!(started_at: started, ip_address: payload[:request].remote_ip,
+      req = paylooad[:request]
+
+      create!(started_at: started, ip_address: req.remote_ip,
               finished_at: finished, uuid: unique_id,
-              http_method: payload[:method],
+              http_method: payload[:method], user_agent: req.user_agent,
               **payload.slice(:controller, :action, :format, :status,
                               :view_runtime, :db_runtime, :path))
     end

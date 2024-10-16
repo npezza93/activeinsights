@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_15_142450) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_16_142157) do
   create_table "active_insights_jobs", force: :cascade do |t|
     t.string "job"
     t.string "queue"
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_15_142450) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ip_address"
+    t.string "user_agent"
     t.index ["started_at", "duration"], name: "index_active_insights_requests_on_started_at_and_duration"
     t.index ["started_at", "formatted_controller"], name: "idx_on_started_at_formatted_controller_5d659a01d9"
     t.index ["started_at"], name: "index_active_insights_requests_on_started_at"
