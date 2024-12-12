@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-#
 require "test_helper"
 
-class ActiveInsights::BasicAuthenticationTest < ActionController::TestCase
+class ActiveInsights::BasicAuthenticationTest < ActionDispatch::IntegrationTest
 
   class TestController < ActionController::Base
     include ActiveInsights::BasicAuthentication
@@ -30,7 +29,7 @@ class ActiveInsights::BasicAuthenticationTest < ActionController::TestCase
   end
 
   test "it does not require http basic auth by default" do
-    get :index
+    get "/test"
 
     assert_response :success
   end
@@ -38,7 +37,7 @@ class ActiveInsights::BasicAuthenticationTest < ActionController::TestCase
   test "it requires http basic auth when enabled" do
     ActiveInsights.http_basic_auth_enabled = true
 
-    get :index
+    get "/test"
 
     assert_response :unauthorized
   end
@@ -47,11 +46,11 @@ class ActiveInsights::BasicAuthenticationTest < ActionController::TestCase
     ActiveInsights.http_basic_auth_enabled = true
     ActiveInsights.http_basic_auth_user = "johndoe"
     ActiveInsights.http_basic_auth_password = "secret"
-    @request.env["HTTP_AUTHORIZATION"] =
-      ActionController::HttpAuthentication::Basic.encode_credentials("johndoe",
-                                                                     "secret")
+    auth = ActionController::HttpAuthentication::Basic.encode_credentials(
+      "johndoe", "secret"
+    )
 
-    get :index
+    get "/test", headers: { "HTTP_AUTHORIZATION" => auth }
 
     assert_response :success
   end
