@@ -11,7 +11,7 @@ module ActiveInsights::BasicAuthentication
     return unless http_basic_authentication_enabled?
 
     if http_basic_authentication_configured?
-      http_basic_authenticate_or_request_with(**http_basic_authentication_credentials)
+      http_basic_authenticate_or_request_with(**http_basic_auth_credentials)
     else
       head :unauthorized
     end
@@ -22,10 +22,10 @@ module ActiveInsights::BasicAuthentication
   end
 
   def http_basic_authentication_configured?
-    http_basic_authentication_credentials.values.all?(&:present?)
+    http_basic_auth_credentials.values.all?(&:present?)
   end
 
-  def http_basic_authentication_credentials
+  def http_basic_auth_credentials
     {
       name: ActiveInsights.http_basic_auth_user,
       password: ActiveInsights.http_basic_auth_password

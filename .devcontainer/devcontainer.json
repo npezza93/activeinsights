@@ -1,0 +1,12 @@
+{
+  "image": "ruby:3.3.5",
+  "postCreateCommand": "bundle install",
+  "forwardPorts": [9292],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-extensions-pack",
+      ]
+    }
+  }
+}
