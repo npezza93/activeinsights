@@ -2,8 +2,6 @@
 
 require "test_helper"
 
-puts ActiveInsights.http_basic_auth_enabled.inspect
-
 class ActiveInsightsTest < ActiveSupport::TestCase
   teardown do
     ActiveInsights.http_basic_auth_enabled = nil
