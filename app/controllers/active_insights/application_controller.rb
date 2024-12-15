@@ -2,6 +2,8 @@
 
 module ActiveInsights
   class ApplicationController < ActionController::Base
+    include ActiveInsights::BasicAuthentication
+
     protect_from_forgery with: :exception
 
     around_action :setup_time_zone

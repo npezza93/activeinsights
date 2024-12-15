@@ -65,6 +65,14 @@ If you are using Sprockets, add the ActiveInsights css file to manifest.js:
 //= link active_insights/application.css
 ```
 
+To use HTTP basic authentication, enable it and define a user and password:
+
+```ruby
+config.active_insights.http_basic_auth_enabled = true
+config.active_insights.http_basic_auth_user = ENV["BASIC_AUTH_USER"]
+config.active_insights.http_basic_auth_password = ENV["BASIC_AUTH_PASSWORD"]
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run

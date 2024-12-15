@@ -7,7 +7,9 @@ require "active_insights/version"
 require "active_insights/engine"
 
 module ActiveInsights
-  mattr_accessor :connects_to, :ignored_endpoints, :enabled
+  mattr_accessor :connects_to, :ignored_endpoints, :enabled,
+                 :http_basic_auth_enabled, :http_basic_auth_user,
+                 :http_basic_auth_password
 
   class << self
     def ignored_endpoint?(payload)
