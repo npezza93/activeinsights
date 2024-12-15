@@ -12,6 +12,7 @@ class ActiveInsights::BasicAuthenticationTest < ActionDispatch::IntegrationTest
   test "it requires http basic auth when enabled" do
     with_http_basic_auth do
       get active_insights.requests_path
+
       assert_response :unauthorized
     end
   end
@@ -19,6 +20,7 @@ class ActiveInsights::BasicAuthenticationTest < ActionDispatch::IntegrationTest
   test "allows access with correct credentials" do
     with_http_basic_auth(user: "dev", password: "secret") do
       get active_insights.requests_path, headers: auth_headers("dev", "secret")
+
       assert_response :success
     end
   end
@@ -26,6 +28,7 @@ class ActiveInsights::BasicAuthenticationTest < ActionDispatch::IntegrationTest
   test "disallows access with incorrect credentials" do
     with_http_basic_auth(user: "dev", password: "secret") do
       get active_insights.requests_path, headers: auth_headers("dev", "wrong")
+
       assert_response :unauthorized
     end
   end
