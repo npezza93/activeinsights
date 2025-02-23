@@ -42,7 +42,7 @@ module ActiveInsights
           !ActiveInsights.enabled?
 
         Thread.new do
-          ActiveRecord::Base.connection_pool.with_connection do
+          Rails.application.executor.wrap do
             ActiveInsights::Request.
               setup(started, finished, unique_id, payload)
           end
